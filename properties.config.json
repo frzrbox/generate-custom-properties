@@ -1,0 +1,21 @@
+{
+	"properties": {
+		"colors": {
+			"red": "red",
+			"blue": "blue",
+			"link": {
+				"idle": "orange",
+				"hovered": "tomato",
+				"alt": {
+					"idle": "green",
+					"hovered": "yellow"
+				}
+			}
+		},
+		"breakpoints": {
+			"small": "768px",
+			"medium": "1024px",
+			"large": "1440px"
+		}
+	}
+}

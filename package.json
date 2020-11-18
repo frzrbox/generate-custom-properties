@@ -38,6 +38,7 @@
 		"rollup-plugin-terser": "^7.0.2"
 	},
 	"dependencies": {
+		"arg": "^5.0.0",
 		"esm": "^3.2.25"
 	}
 }
