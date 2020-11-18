@@ -1,6 +1,5 @@
 import arg from 'arg';
 import fs from 'fs';
-import { type } from 'os';
 
 function parseArgs(cliArgs) {
 	const args = arg({
@@ -17,41 +16,33 @@ function parseArgs(cliArgs) {
 }
 
 function renderTemplate(values) {
-	const template = `
-    :root{
-        ${values}
-    }
-    `;
+	// Don't change this it keeps the format of the code
+	const template = `:root{
+${values}}`;
 
 	return template;
 }
 
-function parseKeyValuePairs(object, prevKey = null) {
-	const allKeys = Object.keys(object);
+function parseKeyValuePairs(obj, prevKey = null, value) {
+	const allKeys = Object.keys(obj);
 
-	function convertToCustomProperty(obj, keys) {
-		const allValues = [];
-		keys.map((key) => {
-			let propString = key;
+	allKeys.map((key) => {
+		let propString = key;
 
-			if (prevKey) {
-				propString = prevKey + `-${key}`;
-			}
+		if (prevKey) {
+			propString = prevKey + `--${key}`;
+		}
 
-			// Return css key:value if last nested level
-			if (typeof obj[key] !== 'object') {
-				console.log(`--${propString}: ${obj[key]};`);
-				return `--${propString}: ${obj[key]};`;
-			}
+		// Return css key:value if last nested level
+		if (typeof obj[key] !== 'object') {
+			value.push(`\--${propString}: ${obj[key]};\n`);
 
-			// Invoke to handle nested objects
-			parseKeyValuePairs(obj[key], propString);
-		});
-	}
+			return value;
+		}
 
-	const values = convertToCustomProperty(object, allKeys);
-
-	console.log(values);
+		// Invoke to handle nested objects
+		parseKeyValuePairs(obj[key], propString, value);
+	});
 }
 
 export function cli(args) {
@@ -61,7 +52,11 @@ export function cli(args) {
 	const configRawData = fs.readFileSync(input);
 	const config = JSON.parse(configRawData);
 
-	parseKeyValuePairs(config.properties);
+	let propertyValues = [];
 
-	fs.writeFileSync(output, renderTemplate('--color-red: red'));
+	// Add config properties to the property values
+	parseKeyValuePairs(config.properties, null, propertyValues);
+	const propertyStrings = propertyValues.join('');
+
+	fs.writeFileSync(output, renderTemplate(propertyStrings));
 }

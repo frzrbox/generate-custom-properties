@@ -8,7 +8,10 @@
 				"hovered": "tomato",
 				"alt": {
 					"idle": "green",
-					"hovered": "yellow"
+					"hovered": "yellow",
+					"test": {
+						"name": "hi"
+					}
 				}
 			}
 		},
@@ -16,6 +19,11 @@
 			"small": "768px",
 			"medium": "1024px",
 			"large": "1440px"
+		},
+		"font-size": {
+			"h1": "48px",
+			"h2": "36px",
+			"h3": "24px"
 		}
 	}
 }
