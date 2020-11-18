@@ -1,14 +1,22 @@
 {
-	"name": "generate-custom-properties",
+	"name": "@frzrbox/generate-custom-properties",
 	"version": "0.0.1",
-	"description": "A utility for generating CSS Custom Properties from a JSON file",
-	"main": "index.js",
+	"description": "A cli for generating CSS Custom Properties from a JSON file",
+	"main": "src/index.js",
+	"bin": {
+		"@frzrbox/generate-custom-properties": "bin/generate-custom-properties",
+		"generate-properties": "bin/generate-custom-properties"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "",
 		"build": "npx rollup -c"
 	},
 	"keywords": [
+		"cli",
 		"css",
 		"custom-properties",
 		"css-variables",
@@ -28,5 +36,8 @@
 		"rollup-plugin-commonjs": "^10.1.0",
 		"rollup-plugin-node-resolve": "^5.2.0",
 		"rollup-plugin-terser": "^7.0.2"
+	},
+	"dependencies": {
+		"esm": "^3.2.25"
 	}
 }
