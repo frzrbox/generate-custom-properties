@@ -19,7 +19,9 @@ function parseArgs(cliArgs) {
 function renderTemplate(values) {
 	// Don't change this it keeps the format of the code
 	const template = `:root{
-${values}}`;
+${values}}
+
+`;
 
 	return template;
 }
@@ -59,21 +61,26 @@ export function cli(args) {
 	parseKeyValuePairs(config.properties, null, propertyValues);
 	const propertyStrings = propertyValues.join('');
 
+	// Compiled :root
+	const rootProperty = renderTemplate(propertyStrings);
+
 	if (fs.existsSync(output)) {
 		const file = fs.readFileSync(output, 'utf-8');
 		const cssFile = css.parse(file);
 
-		const rootProperty = cssFile.stylesheet.rules.filter((prop) => {
+		const rootElement = cssFile.stylesheet.rules.filter((prop) => {
 			if (prop.type === 'rule') {
 				return prop.selectors.toString() === ':root';
 			}
 		});
 
-		if (rootProperty.length === 0) {
-			// fs.writeFileSync(css.stringify(cssFile));
-			console.log('no root');
+		if (rootElement.length === 0) {
+			// Add :root to top of page if it doesn't exist
+			fs.writeFileSync(output, rootProperty + file);
+		} else {
+			// TODO: replace only the root
 		}
 	} else {
-		fs.writeFileSync(output, renderTemplate(propertyStrings));
+		fs.writeFileSync(output, rootProperty);
 	}
 }
