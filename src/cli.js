@@ -50,7 +50,7 @@ function parseKeyValuePairs(obj, prevKey = null, value) {
 
 export function cli(args) {
 	let options = parseArgs(args);
-	const { input, output, type } = options;
+	const { input, output } = options;
 
 	const configRawData = fs.readFileSync(input);
 	const config = JSON.parse(configRawData);

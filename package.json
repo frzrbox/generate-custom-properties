@@ -2,11 +2,14 @@
 	"name": "@frzrbox/generate-custom-properties",
 	"version": "0.0.1",
 	"description": "A cli for generating CSS Custom Properties from a JSON file",
-	"main": "src/index.js",
+	"main": "cli.js",
 	"bin": {
 		"@frzrbox/generate-custom-properties": "bin/generate-custom-properties",
 		"generate-properties": "bin/generate-custom-properties"
 	},
+	"files": [
+		"cli.js"
+	],
 	"publishConfig": {
 		"access": "public"
 	},

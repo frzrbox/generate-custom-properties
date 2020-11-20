@@ -13,3 +13,14 @@
 --font-size--h3: 24px;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
+.flex {
+  display: flex;
+}
+
+.auto-grid {
+  grid-template-columns: 1fr 1fr 1fr;
+}
