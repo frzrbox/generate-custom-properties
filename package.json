@@ -8,7 +8,8 @@
 		"generate-properties": "bin/generate-custom-properties"
 	},
 	"files": [
-		"cli.js"
+		"cli.js",
+		"bin"
 	],
 	"publishConfig": {
 		"access": "public"

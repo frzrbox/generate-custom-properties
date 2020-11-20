@@ -7,7 +7,7 @@
 				"idle": "orange",
 				"hovered": "tomato",
 				"alt": {
-					"idle": "green",
+					"idle": "purple",
 					"hovered": "yellow"
 				}
 			}
