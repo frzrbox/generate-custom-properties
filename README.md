@@ -1,6 +1,6 @@
 # Generate Custom Properties
 
-A cli for generating CSS Custom Properties from a JSON file
+A utility for generating CSS Custom Properties from a JSON file
 
 ## Get Started
 
@@ -10,7 +10,7 @@ A cli for generating CSS Custom Properties from a JSON file
 
 Usage:
 
-`$ generate-properties [flag]`
+`$ generate-properties [flags]`
 
 ### Flags
 
@@ -89,9 +89,9 @@ Output
 
 ```css
 :root {
-    --color--primary: tomato;
-    --color--link--hover: orange;
-    --color--link--cta: green;
+    --colors--primary: tomato;
+    --colors--link--hover: orange;
+    --colors--link--cta: green;
     --breakpoints--small: 768px;
 }
 ```
