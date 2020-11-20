@@ -1,6 +1,6 @@
 {
 	"name": "@frzrbox/generate-custom-properties",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "A cli for generating CSS Custom Properties from a JSON file",
 	"main": "cli.js",
 	"bin": {
@@ -16,6 +16,7 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
+		"dry-run": "npm pack --dry-run",
 		"dev": "npx rollup -c -w",
 		"build": "npx rollup -c"
 	},
