@@ -63,13 +63,16 @@ export function cli(args) {
 		const file = fs.readFileSync(output, 'utf-8');
 		const cssFile = css.parse(file);
 
-		console.log(cssFile.stylesheet.rules);
+		const rootProperty = cssFile.stylesheet.rules.filter((prop) => {
+			if (prop.type === 'rule') {
+				return prop.selectors.toString() === ':root';
+			}
+		});
 
-		const rootElement = cssFile.stylesheet.rules.filter(
-			({ selectors }) => selectors && selectors.filter((val) => val === ':root')
-		);
-
-		console.log(rootElement);
+		if (rootProperty.length === 0) {
+			// fs.writeFileSync(css.stringify(cssFile));
+			console.log('no root');
+		}
 	} else {
 		fs.writeFileSync(output, renderTemplate(propertyStrings));
 	}
