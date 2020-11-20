@@ -1,5 +1,6 @@
 import arg from 'arg';
 import fs from 'fs';
+import css from 'css';
 
 function parseArgs(cliArgs) {
 	const args = arg({
@@ -58,5 +59,18 @@ export function cli(args) {
 	parseKeyValuePairs(config.properties, null, propertyValues);
 	const propertyStrings = propertyValues.join('');
 
-	fs.writeFileSync(output, renderTemplate(propertyStrings));
+	if (fs.existsSync(output)) {
+		const file = fs.readFileSync(output, 'utf-8');
+		const cssFile = css.parse(file);
+
+		console.log(cssFile.stylesheet.rules);
+
+		const rootElement = cssFile.stylesheet.rules.filter(
+			({ selectors }) => selectors && selectors.filter((val) => val === ':root')
+		);
+
+		console.log(rootElement);
+	} else {
+		fs.writeFileSync(output, renderTemplate(propertyStrings));
+	}
 }

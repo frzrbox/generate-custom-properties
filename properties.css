@@ -1,0 +1,19 @@
+/* :root {
+	--colors--red: red;
+	--colors--blue: blue;
+	--colors--link--idle: orange;
+	--colors--link--hovered: tomato;
+	--colors--link--alt--idle: green;
+	--colors--link--alt--hovered: yellow;
+	--colors--link--alt--test--name: hi;
+	--breakpoints--small: 768px;
+	--breakpoints--medium: 1024px;
+	--breakpoints--large: 1440px;
+	--font-size--h1: 48px;
+	--font-size--h2: 36px;
+	--font-size--h3: 24px;
+} */
+
+.uppercase {
+	text-transform: uppercase;
+}
