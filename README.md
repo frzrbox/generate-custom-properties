@@ -89,9 +89,9 @@ Output
 
 ```css
 :root {
-    --color--primary: tomato;
-    --color--link--hover: orange;
-    --color--link--cta: green;
+    --colors--primary: tomato;
+    --colors--link--hover: orange;
+    --colors--link--cta: green;
     --breakpoints--small: 768px;
 }
 ```
