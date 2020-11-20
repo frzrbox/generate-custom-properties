@@ -5,7 +5,6 @@
 --colors--link--hovered: tomato;
 --colors--link--alt--idle: green;
 --colors--link--alt--hovered: yellow;
---colors--link--alt--test--name: hi;
 --breakpoints--small: 768px;
 --breakpoints--medium: 1024px;
 --breakpoints--large: 1440px;
@@ -15,9 +14,9 @@
 }
 
 .uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .flex {
-	display: flex;
+  display: flex;
 }

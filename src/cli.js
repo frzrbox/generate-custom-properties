@@ -78,7 +78,17 @@ export function cli(args) {
 			// Add :root to top of page if it doesn't exist
 			fs.writeFileSync(output, rootProperty + file);
 		} else {
-			// TODO: replace only the root
+			// Get index of the :root
+			const rootIndex = cssFile.stylesheet.rules.findIndex((prop) => {
+				if (prop.type === 'rule') {
+					return prop.selectors.toString() === ':root';
+				}
+			});
+
+			// Remove the current root
+			cssFile.stylesheet.rules.splice(rootIndex, 1);
+
+			fs.writeFileSync(output, rootProperty + css.stringify(cssFile));
 		}
 	} else {
 		fs.writeFileSync(output, rootProperty);

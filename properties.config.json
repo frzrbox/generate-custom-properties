@@ -8,10 +8,7 @@
 				"hovered": "tomato",
 				"alt": {
 					"idle": "green",
-					"hovered": "yellow",
-					"test": {
-						"name": "hi"
-					}
+					"hovered": "yellow"
 				}
 			}
 		},
