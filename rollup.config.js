@@ -6,10 +6,10 @@ import { terser } from 'rollup-plugin-terser';
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
-	input: 'src/index.js',
+	input: 'src/cli.js',
 	output: [
 		{
-			file: 'index.js',
+			file: 'cli.js',
 			format: 'umd',
 			name: 'generate-custom-properties',
 		},

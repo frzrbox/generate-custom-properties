@@ -7,11 +7,8 @@
 				"idle": "orange",
 				"hovered": "tomato",
 				"alt": {
-					"idle": "green",
-					"hovered": "yellow",
-					"test": {
-						"name": "hi"
-					}
+					"idle": "purple",
+					"hovered": "yellow"
 				}
 			}
 		},

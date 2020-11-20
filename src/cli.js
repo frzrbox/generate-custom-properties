@@ -1,5 +1,6 @@
 import arg from 'arg';
 import fs from 'fs';
+import css from 'css';
 
 function parseArgs(cliArgs) {
 	const args = arg({
@@ -18,7 +19,9 @@ function parseArgs(cliArgs) {
 function renderTemplate(values) {
 	// Don't change this it keeps the format of the code
 	const template = `:root{
-${values}}`;
+${values}}
+
+`;
 
 	return template;
 }
@@ -47,7 +50,7 @@ function parseKeyValuePairs(obj, prevKey = null, value) {
 
 export function cli(args) {
 	let options = parseArgs(args);
-	const { input, output, type } = options;
+	const { input, output } = options;
 
 	const configRawData = fs.readFileSync(input);
 	const config = JSON.parse(configRawData);
@@ -58,5 +61,36 @@ export function cli(args) {
 	parseKeyValuePairs(config.properties, null, propertyValues);
 	const propertyStrings = propertyValues.join('');
 
-	fs.writeFileSync(output, renderTemplate(propertyStrings));
+	// Compiled :root
+	const rootProperty = renderTemplate(propertyStrings);
+
+	if (fs.existsSync(output)) {
+		const file = fs.readFileSync(output, 'utf-8');
+		const cssFile = css.parse(file);
+
+		const rootElement = cssFile.stylesheet.rules.filter((prop) => {
+			if (prop.type === 'rule') {
+				return prop.selectors.toString() === ':root';
+			}
+		});
+
+		if (rootElement.length === 0) {
+			// Add :root to top of page if it doesn't exist
+			fs.writeFileSync(output, rootProperty + file);
+		} else {
+			// Get index of the :root
+			const rootIndex = cssFile.stylesheet.rules.findIndex((prop) => {
+				if (prop.type === 'rule') {
+					return prop.selectors.toString() === ':root';
+				}
+			});
+
+			// Remove the current root
+			cssFile.stylesheet.rules.splice(rootIndex, 1);
+
+			fs.writeFileSync(output, rootProperty + css.stringify(cssFile));
+		}
+	} else {
+		fs.writeFileSync(output, rootProperty);
+	}
 }

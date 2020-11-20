@@ -2,17 +2,21 @@
 	"name": "@frzrbox/generate-custom-properties",
 	"version": "0.0.1",
 	"description": "A cli for generating CSS Custom Properties from a JSON file",
-	"main": "src/index.js",
+	"main": "cli.js",
 	"bin": {
 		"@frzrbox/generate-custom-properties": "bin/generate-custom-properties",
 		"generate-properties": "bin/generate-custom-properties"
 	},
+	"files": [
+		"cli.js",
+		"bin"
+	],
 	"publishConfig": {
 		"access": "public"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "",
+		"dev": "npx rollup -c -w",
 		"build": "npx rollup -c"
 	},
 	"keywords": [
@@ -39,6 +43,7 @@
 	},
 	"dependencies": {
 		"arg": "^5.0.0",
+		"css": "^3.0.0",
 		"esm": "^3.2.25"
 	}
 }
