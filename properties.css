@@ -13,10 +13,3 @@
 --font-size--h3: 24px;
 }
 
-.uppercase {
-  text-transform: uppercase;
-}
-
-.flex {
-  display: flex;
-}
