@@ -15,7 +15,6 @@
 		"registry": "https://npm.pkg.github.com/"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"dry-run": "npm pack --dry-run",
 		"dev": "npx rollup -c -w",
 		"build": "npx rollup -c"
