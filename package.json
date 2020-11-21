@@ -1,5 +1,5 @@
 {
-	"name": "@frzrbox/generate-custom-properties",
+	"name": "generate-custom-properties",
 	"version": "0.1.0",
 	"description": "A cli for generating CSS Custom Properties from a JSON file",
 	"main": "cli.js",
