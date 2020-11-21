@@ -11,10 +11,7 @@
 		"cli.js",
 		"bin"
 	],
-	"repository": "github:frzrbox/generate-custom-properties",
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	},
+	"repository": "frzrbox/generate-custom-properties",
 	"scripts": {
 		"dry-run": "npm pack --dry-run",
 		"dev": "npx rollup -c -w",
