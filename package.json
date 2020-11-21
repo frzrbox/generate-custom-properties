@@ -11,6 +11,7 @@
 		"cli.js",
 		"bin"
 	],
+	"repository": "github:frzrbox/generate-custom-properties",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
