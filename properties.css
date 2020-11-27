@@ -3,8 +3,6 @@
 --colors--secondary: blue;
 --colors--link--idle: orange;
 --colors--link--hovered: tomato;
---colors--link--alt--idle: purple;
---colors--link--alt--hovered: yellow;
 --breakpoints--small: 768px;
 --breakpoints--medium: 1024px;
 --breakpoints--large: 1440px;
@@ -20,7 +18,6 @@
 
 .summer{
 --colors--primary: orange;
---text--large: 40px;
---text--medium: 20px;
+--colors--link--hovered: purple;
 }
 

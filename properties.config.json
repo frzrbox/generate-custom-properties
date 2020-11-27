@@ -5,11 +5,7 @@
 			"secondary": "blue",
 			"link": {
 				"idle": "orange",
-				"hovered": "tomato",
-				"alt": {
-					"idle": "purple",
-					"hovered": "yellow"
-				}
+				"hovered": "tomato"
 			}
 		},
 		"breakpoints": {
@@ -31,11 +27,10 @@
 	},
 	"summer": {
 		"colors": {
-			"primary": "orange"
-		},
-		"text": {
-			"large": "40px",
-			"medium": "20px"
+			"primary": "orange",
+			"link": {
+				"hovered": "purple"
+			}
 		}
 	}
 }

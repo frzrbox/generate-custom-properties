@@ -28,70 +28,74 @@ The configuration file defaults to `properties.config.json` and can also be chan
 
 At the moment the only supported configuration file type is `JSON`.
 
-All content **must be nested** within `properties`.
+Any content nested within `root` will be outputed into the css file under `:root`, all other content will be transformed into utility classes.
 
-**Example:**
+### Example
 
-```json
-{
- "properties": {
-    "colors": {
-        "blue": "blue",
-        "link": {
-            "idle": "orange",
-            "hovered": "tomato",
-            "alt": {
-                "idle": "green",
-                "hovered": "yellow"
-            }
-        }
-    },
-    "breakpoints": {
-        "small": "768px",
-        "medium": "1024px",
-        "large": "1440px"
-    },
-    "font-size": {
-        "h1": "48px",
-        "h2": "36px",
-        "h3": "24px"
-    }
-  }
-}
-```
-
-### Output
-
-The Custom Properties generated will be separated by their nested order in the configuration file.
-
-**Example:**
-
-Configuration
+`properties.config.json`
 
 ```json
 {
-    "properties" : {
-        "colors" : {
-            "primary" : "tomato",
-            "link" : {
-                "hover" : "orange",
-                "cta" : "green"
-            }
-        },
-        "breakpoints" : {
-            "small" : "768px"
-        }
-    }
+	"root": {
+		"colors": {
+			"primary": "red",
+			"secondary": "blue",
+			"link": {
+				"idle": "orange",
+				"hovered": "tomato"
+			}
+		},
+		"breakpoints": {
+			"small": "768px",
+			"medium": "1024px",
+			"large": "1440px"
+		},
+		"font-size": {
+			"h1": "48px",
+			"h2": "36px",
+			"h3": "24px"
+		}
+	},
+	"winter": {
+		"colors": {
+			"primary": "green",
+			"secondary": "white"
+		}
+	},
+	"summer": {
+		"colors": {
+			"primary": "orange",
+			"link": {
+				"hovered": "purple"
+			}
+		}
+	}
 }
 ```
 
-Output
+`properties.css`
 
 ```css
-:root {
-    --colors--primary: tomato;
-    --colors--link--hover: orange;
-    --colors--link--cta: green;
-    --breakpoints--small: 768px;
+:root{
+--colors--primary: red;
+--colors--secondary: blue;
+--colors--link--idle: orange;
+--colors--link--hovered: tomato;
+--breakpoints--small: 768px;
+--breakpoints--medium: 1024px;
+--breakpoints--large: 1440px;
+--font-size--h1: 48px;
+--font-size--h2: 36px;
+--font-size--h3: 24px;
+}
+
+.winter{
+--colors--primary: green;
+--colors--secondary: white;
+}
+
+.summer{
+--colors--primary: orange;
+--colors--link--hovered: purple;
 }
 ```
