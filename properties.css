@@ -1,0 +1,9 @@
+.winter{
+--colors--primary: green;
+--colors--secondary: white;
+--colors--link--idle: red;
+--colors--link--hovered: yellow;
+--colors--link--alt--idle: green;
+--colors--link--alt--hovered: orange;
+}
+

@@ -1,8 +1,8 @@
 {
-	"properties": {
+	"root": {
 		"colors": {
-			"red": "red",
-			"blue": "blue",
+			"primary": "red",
+			"secondary": "blue",
 			"link": {
 				"idle": "orange",
 				"hovered": "tomato",
@@ -21,6 +21,20 @@
 			"h1": "48px",
 			"h2": "36px",
 			"h3": "24px"
+		}
+	},
+	"winter": {
+		"colors": {
+			"primary": "green",
+			"secondary": "white",
+			"link": {
+				"idle": "red",
+				"hovered": "yellow",
+				"alt": {
+					"idle": "green",
+					"hovered": "orange"
+				}
+			}
 		}
 	}
 }
