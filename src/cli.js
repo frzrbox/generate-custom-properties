@@ -1,8 +1,6 @@
 import fs from 'fs';
 import css from 'css';
-import parseArgs from './parseArgs';
-import renderTemplate from './renderTemplate';
-import parseKeyValuePairs from './parseKeyValuePairs';
+import { parseArgs, renderTemplate, parseKeyValuePairs } from './util';
 
 export function cli(args) {
 	let options = parseArgs(args);
@@ -17,10 +15,13 @@ export function cli(args) {
 
 		const configProps = Object.entries(config);
 
+		let fileOutput = '';
+
 		configProps.map((prop) => {
 			let values = [];
 			let propName;
 
+			// Add : prefix to root or turn into a class
 			if (prop[0] === 'root') {
 				propName = ':root';
 			} else {
@@ -29,7 +30,7 @@ export function cli(args) {
 
 			parseKeyValuePairs(prop[1], null, values);
 
-			const cssProp = renderTemplate(propName, values.join(''));
+			fileOutput += renderTemplate(propName, values.join(''));
 
 			const propertyExists = cssFile.stylesheet.rules.filter((prop) => {
 				if (prop.type === propName) {
@@ -38,7 +39,7 @@ export function cli(args) {
 			});
 
 			if (propertyExists.length === 0) {
-				fs.writeFileSync(output, cssProp);
+				fs.writeFileSync(output, fileOutput);
 			} else {
 				const propIndex = cssFile.stylesheet.rules.findIndex((prop) => {
 					if (prop.type === 'rule') {
@@ -48,7 +49,7 @@ export function cli(args) {
 
 				cssFile.stylesheet.rules.splice(propIndex, 1);
 
-				fs.writeFileSync(output, cssProp);
+				fs.writeFileSync(output, fileOutput);
 			}
 		});
 	} else {

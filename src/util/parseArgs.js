@@ -1,6 +1,6 @@
 import arg from 'arg';
 
-export default function parseArgs(cliArgs) {
+export function parseArgs(cliArgs) {
 	const args = arg({
 		'--in': String,
 		'--out': String,

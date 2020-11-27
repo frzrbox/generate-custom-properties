@@ -1,9 +1,29 @@
+:root{
+--colors--primary: red;
+--colors--secondary: blue;
+--colors--link--idle: orange;
+--colors--link--hovered: tomato;
+--colors--link--alt--idle: purple;
+--colors--link--alt--hovered: yellow;
+--breakpoints--small: 768px;
+--breakpoints--medium: 1024px;
+--breakpoints--large: 1440px;
+--font-size--h1: 48px;
+--font-size--h2: 36px;
+--font-size--h3: 24px;
+}
+
 .winter{
 --colors--primary: green;
 --colors--secondary: white;
 --colors--link--idle: red;
 --colors--link--hovered: yellow;
 --colors--link--alt--idle: green;
---colors--link--alt--hovered: orange;
+--colors--link--alt--hovered: blue;
+}
+
+.summer{
+--colors--primary: orange;
+--text--large: 40px;
 }
 

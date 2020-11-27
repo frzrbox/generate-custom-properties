@@ -1,4 +1,4 @@
-export default function parseKeyValuePairs(obj, prevKey = null, value) {
+export function parseKeyValuePairs(obj, prevKey = null, value) {
 	const allKeys = Object.keys(obj);
 
 	allKeys.map((key) => {

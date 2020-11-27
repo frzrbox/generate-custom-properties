@@ -32,9 +32,17 @@
 				"hovered": "yellow",
 				"alt": {
 					"idle": "green",
-					"hovered": "orange"
+					"hovered": "blue"
 				}
 			}
+		}
+	},
+	"summer": {
+		"colors": {
+			"primary": "orange"
+		},
+		"text": {
+			"large": "40px"
 		}
 	}
 }
