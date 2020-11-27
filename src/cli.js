@@ -9,28 +9,30 @@ export function cli(args) {
 	const configRawData = fs.readFileSync(input);
 	const config = JSON.parse(configRawData);
 
-	if (fs.existsSync(output)) {
-		const file = fs.readFileSync(output, 'utf-8');
-		const cssFile = css.parse(file);
+	const outputFileExists = fs.existsSync(output);
 
-		const configProps = Object.entries(config);
+	const configProps = Object.entries(config);
 
-		let fileOutput = '';
+	let outputFileContents = '';
 
-		configProps.map((prop) => {
-			let values = [];
-			let propName;
+	configProps.map((prop) => {
+		let values = [];
+		let propName;
 
-			// Add : prefix to root or turn into a class
-			if (prop[0] === 'root') {
-				propName = ':root';
-			} else {
-				propName = '.' + prop[0];
-			}
+		// Add : prefix to root or turn into a class
+		if (prop[0] === 'root') {
+			propName = ':root';
+		} else {
+			propName = '.' + prop[0];
+		}
 
-			parseKeyValuePairs(prop[1], null, values);
+		parseKeyValuePairs(prop[1], null, values);
 
-			fileOutput += renderTemplate(propName, values.join(''));
+		outputFileContents += renderTemplate(propName, values.join(''));
+
+		if (outputFileExists) {
+			const file = fs.readFileSync(output, 'utf-8');
+			const cssFile = css.parse(file);
 
 			const propertyExists = cssFile.stylesheet.rules.filter((prop) => {
 				if (prop.type === propName) {
@@ -39,7 +41,7 @@ export function cli(args) {
 			});
 
 			if (propertyExists.length === 0) {
-				fs.writeFileSync(output, fileOutput);
+				fs.writeFileSync(output, outputFileContents);
 			} else {
 				const propIndex = cssFile.stylesheet.rules.findIndex((prop) => {
 					if (prop.type === 'rule') {
@@ -49,11 +51,10 @@ export function cli(args) {
 
 				cssFile.stylesheet.rules.splice(propIndex, 1);
 
-				fs.writeFileSync(output, fileOutput);
+				fs.writeFileSync(output, outputFileContents);
 			}
-		});
-	} else {
-		// Write the :root property
-		// fs.writeFileSync(output, rootProperty);
-	}
+		} else {
+			fs.writeFileSync(output, outputFileContents);
+		}
+	});
 }

@@ -26,15 +26,7 @@
 	"winter": {
 		"colors": {
 			"primary": "green",
-			"secondary": "white",
-			"link": {
-				"idle": "red",
-				"hovered": "yellow",
-				"alt": {
-					"idle": "green",
-					"hovered": "blue"
-				}
-			}
+			"secondary": "white"
 		}
 	},
 	"summer": {
@@ -42,7 +34,8 @@
 			"primary": "orange"
 		},
 		"text": {
-			"large": "40px"
+			"large": "40px",
+			"medium": "20px"
 		}
 	}
 }

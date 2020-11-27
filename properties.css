@@ -16,14 +16,11 @@
 .winter{
 --colors--primary: green;
 --colors--secondary: white;
---colors--link--idle: red;
---colors--link--hovered: yellow;
---colors--link--alt--idle: green;
---colors--link--alt--hovered: blue;
 }
 
 .summer{
 --colors--primary: orange;
 --text--large: 40px;
+--text--medium: 20px;
 }
 
