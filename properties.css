@@ -21,3 +21,18 @@
 --colors--link--hovered: purple;
 }
 
+[data-theme="dark-mode"]{
+--colors--primary: black;
+--colors--secondary: white;
+}
+
+[data-state="open"]{
+--colors--primary: orange;
+}
+
+[data-theme="high-contrast"]{
+--font-size--h1: 75px;
+--font-size--h2: 40px;
+--font-size--h3: 24px;
+}
+

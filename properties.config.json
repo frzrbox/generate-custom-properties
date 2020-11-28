@@ -32,5 +32,23 @@
 				"hovered": "purple"
 			}
 		}
+	},
+	"theme:dark-mode": {
+		"colors": {
+			"primary": "black",
+			"secondary": "white"
+		}
+	},
+	"state:open": {
+		"colors": {
+			"primary": "orange"
+		}
+	},
+	"theme:high-contrast": {
+		"font-size": {
+			"h1": "75px",
+			"h2": "40px",
+			"h3": "24px"
+		}
 	}
 }

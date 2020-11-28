@@ -22,6 +22,9 @@ export function cli(args) {
 		// Add : prefix to root or turn into a class
 		if (prop[0] === 'root') {
 			propName = ':root';
+		} else if (prop[0].includes(':')) {
+			const splitProp = prop[0].split(':');
+			propName = `[data-${splitProp[0]}="${splitProp[1]}"]`;
 		} else {
 			propName = '.' + prop[0];
 		}
