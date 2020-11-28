@@ -56,7 +56,7 @@ Input:
 Output:
 
 ```css
-.alternate{
+.alternate {
    --colors--primary: orange;
    --font-size--large: 5em;
 }
