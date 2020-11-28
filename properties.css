@@ -35,11 +35,3 @@
 [data-state="open"] {
   --colors--primary: blue;
 }
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.flex {
-  display: flex;
-}

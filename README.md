@@ -69,6 +69,24 @@ Any content nested within `root` will be outputed into the css file under `:root
 				"hovered": "purple"
 			}
 		}
+	},
+	"theme:dark-mode": {
+		"colors": {
+			"primary": "black",
+			"secondary": "white"
+		}
+	},
+	"theme:high-contrast": {
+		"font-size": {
+			"h1": "75px",
+			"h2": "40px",
+			"h3": "24px"
+		}
+	},
+	"state:open": {
+		"colors": {
+			"primary": "blue"
+		}
 	}
 }
 ```
@@ -76,26 +94,41 @@ Any content nested within `root` will be outputed into the css file under `:root
 `properties.css`
 
 ```css
-:root{
---colors--primary: red;
---colors--secondary: blue;
---colors--link--idle: orange;
---colors--link--hovered: tomato;
---breakpoints--small: 768px;
---breakpoints--medium: 1024px;
---breakpoints--large: 1440px;
---font-size--h1: 48px;
---font-size--h2: 36px;
---font-size--h3: 24px;
+:root {
+  --colors--primary: red;
+  --colors--secondary: blue;
+  --colors--link--idle: orange;
+  --colors--link--hovered: tomato;
+  --breakpoints--small: 768px;
+  --breakpoints--medium: 1024px;
+  --breakpoints--large: 1440px;
+  --font-size--h1: 48px;
+  --font-size--h2: 36px;
+  --font-size--h3: 24px;
 }
 
-.winter{
---colors--primary: green;
---colors--secondary: white;
+.winter {
+  --colors--primary: green;
+  --colors--secondary: white;
 }
 
-.summer{
---colors--primary: orange;
---colors--link--hovered: purple;
+.summer {
+  --colors--primary: orange;
+  --colors--link--hovered: purple;
+}
+
+[data-theme="dark-mode"] {
+  --colors--primary: black;
+  --colors--secondary: white;
+}
+
+[data-theme="high-contrast"] {
+  --font-size--h1: 75px;
+  --font-size--h2: 40px;
+  --font-size--h3: 24px;
+}
+
+[data-state="open"] {
+  --colors--primary: blue;
 }
 ```
