@@ -28,7 +28,64 @@ The configuration file defaults to `properties.config.json` and can also be chan
 
 At the moment the only supported configuration file type is `JSON`.
 
-Any content nested within `root` will be outputed into the css file under `:root`, all other content will be transformed into utility classes.
+### Handling Output
+
+#### :Root
+
+Any content nested within `root` will be declared in the css file as `:root`
+
+#### Utilities
+
+By default all properties on the root level will create a new utlity class
+
+Input:
+```json
+{
+	"alternate": {
+		"colors": {
+			"primary": "orange"
+		},
+		"font-size":{
+			"large": "5em"
+		}
+	}
+}
+```
+
+Output:
+```css
+.alternate{
+	--colors--primary: orange;
+	--font-size--large: 5em;
+}
+```
+
+#### Data Attributes
+
+To create custom data attribute, separate the attribute name and the value with `:`
+
+Example:
+`attribute-name:value`
+
+Input:
+```json
+{
+	"theme:dark-mode": {
+		"colors": {
+			"primary": "black",
+			"secondary": "white"
+		}
+	}
+}
+```
+
+Output:
+```css
+[data-theme="dark-mode"] {
+  --colors--primary: black;
+  --colors--secondary: white;
+}
+```
 
 ### Example
 
