@@ -1,52 +1,6 @@
-import arg from 'arg';
 import fs from 'fs';
 import css from 'css';
-
-function parseArgs(cliArgs) {
-	const args = arg({
-		'--in': String,
-		'--out': String,
-		'--type': String,
-	});
-
-	return {
-		input: args['--in'] || 'properties.config.json',
-		output: args['--out'] || 'properties.css',
-		type: args['--type'] || 'JSON',
-	};
-}
-
-function renderTemplate(values) {
-	// Don't change this it keeps the format of the code
-	const template = `:root{
-${values}}
-
-`;
-
-	return template;
-}
-
-function parseKeyValuePairs(obj, prevKey = null, value) {
-	const allKeys = Object.keys(obj);
-
-	allKeys.map((key) => {
-		let propString = key;
-
-		if (prevKey) {
-			propString = prevKey + `--${key}`;
-		}
-
-		// Return css key:value if last nested level
-		if (typeof obj[key] !== 'object') {
-			value.push(`\--${propString}: ${obj[key]};\n`);
-
-			return value;
-		}
-
-		// Invoke to handle nested objects
-		parseKeyValuePairs(obj[key], propString, value);
-	});
-}
+import { parseArgs, renderTemplate, parseKeyValuePairs } from './util';
 
 export function cli(args) {
 	let options = parseArgs(args);
@@ -55,42 +9,47 @@ export function cli(args) {
 	const configRawData = fs.readFileSync(input);
 	const config = JSON.parse(configRawData);
 
-	let propertyValues = [];
+	const outputFileExists = fs.existsSync(output);
 
-	// Add config properties to the property values
-	parseKeyValuePairs(config.properties, null, propertyValues);
-	const propertyStrings = propertyValues.join('');
+	const configProps = Object.entries(config);
 
-	// Compiled :root
-	const rootProperty = renderTemplate(propertyStrings);
+	let outputFileContents = '';
 
-	if (fs.existsSync(output)) {
+	configProps.map((prop) => {
+		let values = [];
+		let propName;
+
+		// Add : prefix to root or turn into a class
+		if (prop[0] === 'root') {
+			propName = ':root';
+		} else if (prop[0].includes(':')) {
+			const splitProp = prop[0].split(':');
+			propName = `[data-${splitProp[0]}="${splitProp[1]}"]`;
+		} else {
+			propName = '.' + prop[0];
+		}
+
+		parseKeyValuePairs(prop[1], null, values);
+
+		outputFileContents += renderTemplate(propName, values.join(''));
+	});
+
+	if (outputFileExists) {
 		const file = fs.readFileSync(output, 'utf-8');
 		const cssFile = css.parse(file);
+		const updatedDesignTokens = css.parse(outputFileContents);
 
-		const rootElement = cssFile.stylesheet.rules.filter((prop) => {
-			if (prop.type === 'rule') {
-				return prop.selectors.toString() === ':root';
-			}
-		});
+		// Only update rules in the configuration file
+		// all other declarations in the css file will be ignored
+		const updatedRules = Object.assign(
+			cssFile.stylesheet.rules,
+			updatedDesignTokens.stylesheet.rules
+		);
 
-		if (rootElement.length === 0) {
-			// Add :root to top of page if it doesn't exist
-			fs.writeFileSync(output, rootProperty + file);
-		} else {
-			// Get index of the :root
-			const rootIndex = cssFile.stylesheet.rules.findIndex((prop) => {
-				if (prop.type === 'rule') {
-					return prop.selectors.toString() === ':root';
-				}
-			});
+		cssFile.stylesheet.rules = updatedRules;
 
-			// Remove the current root
-			cssFile.stylesheet.rules.splice(rootIndex, 1);
-
-			fs.writeFileSync(output, rootProperty + css.stringify(cssFile));
-		}
+		fs.writeFileSync(output, css.stringify(cssFile));
 	} else {
-		fs.writeFileSync(output, rootProperty);
+		fs.writeFileSync(output, outputFileContents);
 	}
 }

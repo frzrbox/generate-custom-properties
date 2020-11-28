@@ -28,70 +28,168 @@ The configuration file defaults to `properties.config.json` and can also be chan
 
 At the moment the only supported configuration file type is `JSON`.
 
-All content **must be nested** within `properties`.
+### Handling Output
 
-**Example:**
+#### :Root
 
-```json
-{
- "properties": {
-    "colors": {
-        "blue": "blue",
-        "link": {
-            "idle": "orange",
-            "hovered": "tomato",
-            "alt": {
-                "idle": "green",
-                "hovered": "yellow"
-            }
-        }
-    },
-    "breakpoints": {
-        "small": "768px",
-        "medium": "1024px",
-        "large": "1440px"
-    },
-    "font-size": {
-        "h1": "48px",
-        "h2": "36px",
-        "h3": "24px"
-    }
-  }
-}
-```
+Any content nested within `root` will be declared in the css file as `:root`
 
-### Output
+#### Utilities
 
-The Custom Properties generated will be separated by their nested order in the configuration file.
+By default all properties on the root level will create a new utlity class
 
-**Example:**
-
-Configuration
+Input:
 
 ```json
 {
-    "properties" : {
-        "colors" : {
-            "primary" : "tomato",
-            "link" : {
-                "hover" : "orange",
-                "cta" : "green"
-            }
-        },
-        "breakpoints" : {
-            "small" : "768px"
-        }
-    }
+   "alternate":{
+      "colors":{
+         "primary":"orange"
+      },
+      "font-size":{
+         "large":"5em"
+      }
+   }
 }
 ```
 
-Output
+Output:
+
+```css
+.alternate {
+   --colors--primary: orange;
+   --font-size--large: 5em;
+}
+```
+
+#### Data Attributes
+
+To create custom data attribute, separate the attribute name and the value with `:`
+
+Example:
+`attribute-name:value`
+
+Input:
+
+```json
+{
+   "theme:dark-mode":{
+      "colors":{
+         "primary":"black",
+         "secondary":"white"
+      }
+   }
+}
+```
+
+Output:
+
+```css
+[data-theme="dark-mode"] {
+  --colors--primary: black;
+  --colors--secondary: white;
+}
+```
+
+### Example
+
+`properties.config.json`
+
+```json
+{
+   "root":{
+      "colors":{
+         "primary":"red",
+         "secondary":"blue",
+         "link":{
+            "idle":"orange",
+            "hovered":"tomato"
+         }
+      },
+      "breakpoints":{
+         "small":"768px",
+         "medium":"1024px",
+         "large":"1440px"
+      },
+      "font-size":{
+         "h1":"48px",
+         "h2":"36px",
+         "h3":"24px"
+      }
+   },
+   "winter":{
+      "colors":{
+         "primary":"green",
+         "secondary":"white"
+      }
+   },
+   "summer":{
+      "colors":{
+         "primary":"orange",
+         "link":{
+            "hovered":"purple"
+         }
+      }
+   },
+   "theme:dark-mode":{
+      "colors":{
+         "primary":"black",
+         "secondary":"white"
+      }
+   },
+   "theme:high-contrast":{
+      "font-size":{
+         "h1":"75px",
+         "h2":"40px",
+         "h3":"24px"
+      }
+   },
+   "state:open":{
+      "colors":{
+         "primary":"blue"
+      }
+   }
+}
+```
+
+`properties.css`
 
 ```css
 :root {
-    --colors--primary: tomato;
-    --colors--link--hover: orange;
-    --colors--link--cta: green;
-    --breakpoints--small: 768px;
+  --colors--primary: red;
+  --colors--secondary: blue;
+  --colors--link--idle: orange;
+  --colors--link--hovered: tomato;
+  --breakpoints--small: 768px;
+  --breakpoints--medium: 1024px;
+  --breakpoints--large: 1440px;
+  --font-size--h1: 48px;
+  --font-size--h2: 36px;
+  --font-size--h3: 24px;
+}
+
+.winter {
+  --colors--primary: green;
+  --colors--secondary: white;
+}
+
+.summer {
+  --colors--primary: orange;
+  --colors--link--hovered: purple;
+}
+
+[data-theme="dark-mode"] {
+  --colors--primary: black;
+  --colors--secondary: white;
+}
+
+[data-theme="high-contrast"] {
+  --font-size--h1: 75px;
+  --font-size--h2: 40px;
+  --font-size--h3: 24px;
+}
+
+[data-state="open"] {
+  --colors--primary: blue;
 }
 ```
