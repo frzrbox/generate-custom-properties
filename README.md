@@ -39,24 +39,26 @@ Any content nested within `root` will be declared in the css file as `:root`
 By default all properties on the root level will create a new utlity class
 
 Input:
+
 ```json
 {
-	"alternate": {
-		"colors": {
-			"primary": "orange"
-		},
-		"font-size":{
-			"large": "5em"
-		}
-	}
+   "alternate":{
+      "colors":{
+         "primary":"orange"
+      },
+      "font-size":{
+         "large":"5em"
+      }
+   }
 }
 ```
 
 Output:
+
 ```css
 .alternate{
-	--colors--primary: orange;
-	--font-size--large: 5em;
+   --colors--primary: orange;
+   --font-size--large: 5em;
 }
 ```
 
@@ -68,18 +70,20 @@ Example:
 `attribute-name:value`
 
 Input:
+
 ```json
 {
-	"theme:dark-mode": {
-		"colors": {
-			"primary": "black",
-			"secondary": "white"
-		}
-	}
+   "theme:dark-mode":{
+      "colors":{
+         "primary":"black",
+         "secondary":"white"
+      }
+   }
 }
 ```
 
 Output:
+
 ```css
 [data-theme="dark-mode"] {
   --colors--primary: black;
@@ -93,58 +97,58 @@ Output:
 
 ```json
 {
-	"root": {
-		"colors": {
-			"primary": "red",
-			"secondary": "blue",
-			"link": {
-				"idle": "orange",
-				"hovered": "tomato"
-			}
-		},
-		"breakpoints": {
-			"small": "768px",
-			"medium": "1024px",
-			"large": "1440px"
-		},
-		"font-size": {
-			"h1": "48px",
-			"h2": "36px",
-			"h3": "24px"
-		}
-	},
-	"winter": {
-		"colors": {
-			"primary": "green",
-			"secondary": "white"
-		}
-	},
-	"summer": {
-		"colors": {
-			"primary": "orange",
-			"link": {
-				"hovered": "purple"
-			}
-		}
-	},
-	"theme:dark-mode": {
-		"colors": {
-			"primary": "black",
-			"secondary": "white"
-		}
-	},
-	"theme:high-contrast": {
-		"font-size": {
-			"h1": "75px",
-			"h2": "40px",
-			"h3": "24px"
-		}
-	},
-	"state:open": {
-		"colors": {
-			"primary": "blue"
-		}
-	}
+   "root":{
+      "colors":{
+         "primary":"red",
+         "secondary":"blue",
+         "link":{
+            "idle":"orange",
+            "hovered":"tomato"
+         }
+      },
+      "breakpoints":{
+         "small":"768px",
+         "medium":"1024px",
+         "large":"1440px"
+      },
+      "font-size":{
+         "h1":"48px",
+         "h2":"36px",
+         "h3":"24px"
+      }
+   },
+   "winter":{
+      "colors":{
+         "primary":"green",
+         "secondary":"white"
+      }
+   },
+   "summer":{
+      "colors":{
+         "primary":"orange",
+         "link":{
+            "hovered":"purple"
+         }
+      }
+   },
+   "theme:dark-mode":{
+      "colors":{
+         "primary":"black",
+         "secondary":"white"
+      }
+   },
+   "theme:high-contrast":{
+      "font-size":{
+         "h1":"75px",
+         "h2":"40px",
+         "h3":"24px"
+      }
+   },
+   "state:open":{
+      "colors":{
+         "primary":"blue"
+      }
+   }
 }
 ```
 
