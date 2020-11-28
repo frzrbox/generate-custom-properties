@@ -32,32 +32,24 @@ export function cli(args) {
 		parseKeyValuePairs(prop[1], null, values);
 
 		outputFileContents += renderTemplate(propName, values.join(''));
-
-		if (outputFileExists) {
-			const file = fs.readFileSync(output, 'utf-8');
-			const cssFile = css.parse(file);
-
-			const propertyExists = cssFile.stylesheet.rules.filter((prop) => {
-				if (prop.type === propName) {
-					return prop;
-				}
-			});
-
-			if (propertyExists.length === 0) {
-				fs.writeFileSync(output, outputFileContents);
-			} else {
-				const propIndex = cssFile.stylesheet.rules.findIndex((prop) => {
-					if (prop.type === 'rule') {
-						return prop.selectors.toString() === propName;
-					}
-				});
-
-				cssFile.stylesheet.rules.splice(propIndex, 1);
-
-				fs.writeFileSync(output, outputFileContents);
-			}
-		} else {
-			fs.writeFileSync(output, outputFileContents);
-		}
 	});
+
+	if (outputFileExists) {
+		const file = fs.readFileSync(output, 'utf-8');
+		const cssFile = css.parse(file);
+		const updatedDesignTokens = css.parse(outputFileContents);
+
+		// Only update rules in the configuration file
+		// all other declarations in the css file will be ignored
+		const updatedRules = Object.assign(
+			cssFile.stylesheet.rules,
+			updatedDesignTokens.stylesheet.rules
+		);
+
+		cssFile.stylesheet.rules = updatedRules;
+
+		fs.writeFileSync(output, css.stringify(cssFile));
+	} else {
+		fs.writeFileSync(output, outputFileContents);
+	}
 }
